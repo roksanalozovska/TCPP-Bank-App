@@ -44,7 +44,7 @@ namespace BankClients
             return resultList;
         }
 
-        // Метод для видалення/редагування 
+        // Метод для виконання SQL-запитів
         public void ExecuteNonQuery(string query)
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
