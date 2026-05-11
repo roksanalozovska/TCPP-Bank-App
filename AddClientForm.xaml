@@ -1,0 +1,32 @@
+<Window x:Class="BankClients.AddClientForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Додавання клієнта" Height="350" Width="300">
+
+    <Grid Margin="10">
+        <StackPanel>
+
+            <Label Content="Прізвище"/>
+            <TextBox x:Name="surnameTB"/>
+
+            <Label Content="Ім'я"/>
+            <TextBox x:Name="nameTB"/>
+
+            <Label Content="По батькові"/>
+            <TextBox x:Name="patronymicTB"/>
+
+            <Label Content="Адреса"/>
+            <TextBox x:Name="addressTB"/>
+
+            <Label Content="Вік"/>
+            <TextBox x:Name="ageTB"/>
+
+            <Label Content="Баланс"/>
+            <TextBox x:Name="balanceTB"/>
+
+            <Button Content="Додати"
+                    Margin="0,10,0,0"
+                    Click="AddButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
