@@ -50,6 +50,22 @@ namespace BankClients
                 MessageBox.Show("Помилка при оновленні: " + ex.Message);
             }
         }
+        // Редагування даних клієнта
+        private void EditDataMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (ClientListDG.SelectedItem == null)
+            {
+                MessageBox.Show("Виберіть клієнта.");
+                return;
+            }
 
+            Client selectedClient = (Client)ClientListDG.SelectedItem;
+
+            EditClientForm form = new EditClientForm(selectedClient);
+            form.ShowDialog();
+
+            ClientListDG.ItemsSource =
+                DataConnection.fList("SELECT * FROM clients;");
+        }
     }
 }

@@ -21,7 +21,9 @@
             </MenuItem>
 
             <MenuItem x:Name="ClientsMenu" Header="Клієнти" IsEnabled="False">
-                <MenuItem Name="EditDataMenuItem" Header="Редагувати"/>
+                <MenuItem Name="EditDataMenuItem" 
+                          Header="Редагувати"
+                           Click="EditDataMenuItem_Click"/>
                 <MenuItem Name="AddDataMenuItem" Header="Додати"/>
                 <MenuItem Name="DeleteDataMenuItem" Header="Видалити"/>
             </MenuItem>

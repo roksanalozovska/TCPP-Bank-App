@@ -59,6 +59,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="EditClientForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LogInForm.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
@@ -73,6 +76,9 @@
     </Compile>
     <Compile Include="Authorization.cs" />
     <Compile Include="DataAccess.cs" />
+    <Compile Include="EditClientForm.xaml.cs">
+      <DependentUpon>EditClientForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Globals.cs" />
     <Compile Include="LogInForm.xaml.cs">
       <DependentUpon>LogInForm.xaml</DependentUpon>
