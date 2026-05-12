@@ -67,5 +67,45 @@ namespace BankClients
             ClientListDG.ItemsSource =
                 DataConnection.fList("SELECT * FROM clients;");
         }
+        // Додавання нового клієнта
+        private void AddDataMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            AddClientForm form = new AddClientForm();
+
+            form.ShowDialog();
+
+            ClientListDG.ItemsSource =
+                DataConnection.fList("SELECT * FROM clients;");
+        }
+        // Видалення клієнта
+        private void DeleteDataMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (ClientListDG.SelectedItem == null)
+            {
+                MessageBox.Show("Виберіть клієнта.");
+                return;
+            }
+
+            Client selectedClient = (Client)ClientListDG.SelectedItem;
+
+            MessageBoxResult result =
+                MessageBox.Show(
+                    "Видалити клієнта?",
+                    "Підтвердження",
+                    MessageBoxButton.YesNo);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                string query =
+                    $"DELETE FROM clients WHERE id={selectedClient.id};";
+
+                DataConnection.ExecuteNonQuery(query);
+
+                ClientListDG.ItemsSource =
+                    DataConnection.fList("SELECT * FROM clients;");
+
+                MessageBox.Show("Клієнта видалено.");
+            }
+        }
     }
 }
