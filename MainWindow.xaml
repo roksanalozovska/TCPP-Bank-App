@@ -5,42 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankClients"
         mc:Ignorable="d"
-        Title="Облік клієнтів банку" Height="450" Width="800"
+        Title="Облік клієнтів банку" Height="500" Width="900"
         Loaded="InfoClientForm_Loaded">
 
-    <Grid>
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="280" />
+        </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Menu Name="MainMenu" Grid.Row="0" BorderThickness="0,0,0,1" Background="White">
+        <Menu Name="MainMenu" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+              BorderThickness="0,0,0,1" Background="White" VerticalAlignment="Top">
             <MenuItem Name="FileMenuItem" Header="Файл">
                 <MenuItem Name="LoadDataMenuItem" Header="Завантажити" Click="LoadDataMenuItem_Click"/>
                 <MenuItem Name="SaveDataMenuItem" Header="Зберегти"/>
             </MenuItem>
 
             <MenuItem x:Name="ClientsMenu" Header="Клієнти" IsEnabled="False">
-                <MenuItem Name="EditDataMenuItem" 
-                          Header="Редагувати"
-                          Click="EditDataMenuItem_Click"/>
-                <MenuItem Name="AddDataMenuItem"
-                          Header="Додати"
-                          Click="AddDataMenuItem_Click"/>
-                <MenuItem Name="DeleteDataMenuItem"
-                          Header="Видалити"
-                          Click="DeleteDataMenuItem_Click"/>
+                <MenuItem Name="EditDataMenuItem" Header="Редагувати" Click="EditDataMenuItem_Click"/>
+                <MenuItem Name="AddDataMenuItem" Header="Додати" Click="AddDataMenuItem_Click"/>
+                <MenuItem Name="DeleteDataMenuItem" Header="Видалити" Click="DeleteDataMenuItem_Click"/>
             </MenuItem>
 
             <MenuItem x:Name="SearchMenu" Header="Пошук" IsEnabled="False">
-                <MenuItem Name="SelectYearsMenuItem" Header="Розрахувати роки для кредиту"/>
-                <MenuItem Name="SelectSumMenuItem" Header="Фільтр за сумою YYY"/>
+                <MenuItem Name="SelectYearsMenuItem" Header="Розрахувати роки для кредиту" Click="SelectYearsMenuItem_Click"/>
+                <MenuItem Name="SelectSumMenuItem" Header="Фільтр за сумою YYY" Click="SearchBalanceMI_Click"/>
             </MenuItem>
 
             <MenuItem Name="AuthMenuItem" Header="Авторизація" Click="AuthMenuItem_Click"/>
         </Menu>
 
-        <DataGrid x:Name="ClientListDG" Grid.Row="1" Margin="5" 
+        <DataGrid x:Name="ClientListDG" Grid.Row="1" Grid.Column="0" Margin="5" 
                   AutoGenerateColumns="False" ItemsSource="{Binding}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding id}" Width="25"/>
@@ -50,5 +50,23 @@
                 <DataGridTextColumn Header="Баланс" Binding="{Binding balance}" Width="100"/>
             </DataGrid.Columns>
         </DataGrid>
+
+        <GroupBox x:Name="SearchNameGB" Grid.Row="1" Grid.Column="1"
+                  Header="Пошук клієнтів" Visibility="Hidden" Margin="10" VerticalAlignment="Top">
+            <StackPanel>
+                <Label Content="Ім'я клієнта:"/>
+                <TextBox x:Name="NameTB" Margin="5"/>
+                <Button x:Name="SelectNameBtn" Content="Розрахувати" Margin="5" Click="SelectNameBtn_Click"/>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox x:Name="SearchBalanceGB" Grid.Row="1" Grid.Column="1"
+                  Header="Фільтр за сумою" Visibility="Hidden" Margin="10" VerticalAlignment="Top">
+            <StackPanel>
+                <Label Content="Сума на рахунку більше:"/>
+                <TextBox x:Name="BalanceTB" Margin="5"/>
+                <Button x:Name="SelectBalanceBtn" Content="Знайти" Margin="5" Click="SelectBalanceBtn_Click"/>
+            </StackPanel>
+        </GroupBox>
     </Grid>
 </Window>

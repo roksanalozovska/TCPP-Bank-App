@@ -3,7 +3,7 @@ namespace BankClients
 {
     public class Client
     {
-        public Client(int id, string surname, string name, string patronymic, string address, int age, decimal balance)
+        public Client(int id, string surname, string name, string patronymic, string address, int age, double balance)
         {
             this.id = id;
             this.surname = surname;
@@ -19,7 +19,7 @@ namespace BankClients
         public string patronymic { get; set; }
         public string address { get; set; }
         public int age { get; set; }
-        public decimal balance { get; set; }
+        public double balance { get; set; }
         public string fullName => $"{surname} {name} {patronymic}";
     }
 }
