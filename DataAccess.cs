@@ -31,7 +31,7 @@ namespace BankClients
                                 reader["patronymic"].ToString(),
                                 reader["address"].ToString(),
                                 Convert.ToInt32(reader["age"]),
-                                Convert.ToDecimal(reader["balance"])
+                                Convert.ToDouble(reader["balance"])
                             ));
                         }
                     }
@@ -53,11 +53,6 @@ namespace BankClients
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 cmd.ExecuteNonQuery();
             }
-        }
-
-        internal IEnumerable<object> GetClients(string v)
-        {
-            throw new NotImplementedException();
         }
     }
 }

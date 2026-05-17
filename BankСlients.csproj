@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SelectData.cs" />
     <Page Include="AddClientForm.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
