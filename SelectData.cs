@@ -6,7 +6,7 @@ using Word= Microsoft.Office.Interop.Word;
 
 namespace BankClients
 {
-    class SelectData
+    public class SelectData
     {
         public List<Client> clientList = new List<Client>();
         public List<Client> selectedNameList = new List<Client>();    // Результат для X
@@ -85,7 +85,7 @@ namespace BankClients
         }
 
         // Створення документа на основі шаблону 
-        public void WriteData(List<Client> selXList, List<Client> selXYList, string searchName, string searchYears, string searchSum)
+        public void WriteData(string searchName, string searchYears, string searchSum)
         {
             filePath = Environment.CurrentDirectory.ToString();
 
@@ -107,8 +107,8 @@ namespace BankClients
             ReplaceText("[Years]", searchYears);
             ReplaceText("[Sum]", searchSum);
             // Заповнюємо таблиці у Word
-            if (selXList.Count > 0) ReplaceText(selXList, 1); 
-            if (selXYList.Count > 0) ReplaceText(selXYList, 2); 
+            if (selectedNameList.Count > 0) ReplaceText(selectedNameList, 1);
+            if (selectedXYList.Count > 0) ReplaceText(selectedXYList, 2);
 
             try
             {
@@ -122,8 +122,12 @@ namespace BankClients
         }
         ~SelectData()
         {
-            if (wordDoc != null) wordDoc.Close(Word.WdSaveOptions.wdPromptToSaveChanges); 
-            if (wordApp != null) wordApp.Quit(Word.WdSaveOptions.wdPromptToSaveChanges);
+            try
+            {
+                if (wordDoc != null) wordDoc.Close(Word.WdSaveOptions.wdPromptToSaveChanges);
+                if (wordApp != null) wordApp.Quit(Word.WdSaveOptions.wdPromptToSaveChanges);
+            }
+            catch { }
         }
     }
 }
