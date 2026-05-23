@@ -25,6 +25,17 @@ namespace BankClients
                 SearchMenu.IsEnabled = false;
             }
         }
+        // Універсальний метод для відображення помилок у MessageBox
+        public static void ErrorShow(Exception ex, string MsgStr, string MsgName, MessageBoxButton MsgBtn, MessageBoxImage MsgImg)
+        {
+            MessageBox.Show(ex.Message + char.ConvertFromUtf32(13) + char.ConvertFromUtf32(13) + MsgStr, MsgName, MsgBtn, MsgImg);
+        }
+        // Метод для зміни розміру форми
+        private void ResizeForm(double FrmWidth, double FrmHeight)
+        {
+            this.Width = FrmWidth;
+            this.Height = FrmHeight;
+        }
         private void AuthMenuItem_Click(object sender, RoutedEventArgs e)
         {
             LogInForm logWnd = new LogInForm();
@@ -34,6 +45,7 @@ namespace BankClients
         // Автоматичне завантаження 
         private void InfoClientForm_Loaded(object sender, RoutedEventArgs e)
         {
+            ResizeForm(900, 500);
             DataConnection = new DataAccess();
             var list = DataConnection.fList("SELECT * FROM clients;");
             ClientListDG.ItemsSource = list;
@@ -54,7 +66,8 @@ namespace BankClients
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Помилка при оновленні: " + ex.Message);
+                // Викликаємо універсальний метод для відображення помилки
+                ErrorShow(ex, "Для завантаження даних виконайте команду Файл-Завантажити", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         // Редагування даних клієнта
@@ -180,6 +193,26 @@ namespace BankClients
             {
                 MessageBox.Show("Введіть коректну суму для фільтрації.");
             }
+        }
+        // Збереження результатів пошуку в шаблоні Word
+        private void SaveSelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string nameCriteria = string.IsNullOrEmpty(NameTB.Text) ? "Не задано" : NameTB.Text;
+            string sumCriteria = string.IsNullOrEmpty(BalanceTB.Text) ? "0" : BalanceTB.Text;
+
+            string calculatedYears = "Кредит не розраховувався";
+
+            if (selectData.selectedNameList.Count > 0)
+            {
+                int maxCreditYears = 65 - selectData.selectedNameList[0].age;
+                calculatedYears = maxCreditYears < 1 ? "Кредит неможливий" : maxCreditYears.ToString() + " років";
+            }
+            selectData.WriteData(
+
+                nameCriteria,
+                calculatedYears,
+                sumCriteria
+            );
         }
 
     }
