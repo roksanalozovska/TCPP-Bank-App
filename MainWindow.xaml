@@ -56,7 +56,10 @@
             <StackPanel>
                 <Label Content="Ім'я клієнта:"/>
                 <TextBox x:Name="NameTB" Margin="5"/>
-                <Button x:Name="SelectNameBtn" Content="Розрахувати" Margin="5" Click="SelectNameBtn_Click"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="SelectNameBtn" Content="Розрахувати" Margin="5" Click="SelectNameBtn_Click"/>
+                    <Button x:Name="SaveNameBtn" Content="Зберегти" Margin="5" Width="100" Click="SaveSelBtn_Click"/>
+                </StackPanel>
             </StackPanel>
         </GroupBox>
 
@@ -65,7 +68,10 @@
             <StackPanel>
                 <Label Content="Сума на рахунку більше:"/>
                 <TextBox x:Name="BalanceTB" Margin="5"/>
-                <Button x:Name="SelectBalanceBtn" Content="Знайти" Margin="5" Click="SelectBalanceBtn_Click"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="SelectBalanceBtn" Content="Знайти" Margin="5" Click="SelectBalanceBtn_Click"/>
+                    <Button x:Name="SaveBalanceBtn" Content="Зберегти" Margin="5" Width="100" Click="SaveSelBtn_Click"/>
+                </StackPanel>
             </StackPanel>
         </GroupBox>
     </Grid>

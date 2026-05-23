@@ -181,6 +181,27 @@ namespace BankClients
                 MessageBox.Show("Введіть коректну суму для фільтрації.");
             }
         }
+        // Збереження результатів пошуку в шаблоні Word
+        private void SaveSelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string nameCriteria = string.IsNullOrEmpty(NameTB.Text) ? "Не задано" : NameTB.Text;
+            string sumCriteria = string.IsNullOrEmpty(BalanceTB.Text) ? "0" : BalanceTB.Text;
+
+            string calculatedYears = "Кредит не розраховувався";
+
+            if (selectData.selectedNameList.Count > 0)
+            {
+                int maxCreditYears = 65 - selectData.selectedNameList[0].age;
+                calculatedYears = maxCreditYears < 1 ? "Кредит неможливий" : maxCreditYears.ToString() + " років";
+            }
+            selectData.WriteData(
+                selectData.selectedNameList,
+                selectData.selectedXYList,
+                nameCriteria,
+                calculatedYears,
+                sumCriteria
+            );
+        }
 
     }
 }
